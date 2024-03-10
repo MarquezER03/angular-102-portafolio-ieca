@@ -20,6 +20,10 @@
     [] 97.1
 */
 
+function print(arguments) {
+    console.log(arguments)
+}
+
 function vaciarCarritoConTotal() {
     let total = 0;
     const carrito = [
@@ -37,7 +41,15 @@ function vaciarCarritoConTotal() {
         },
     ];
 
-    // Completa aquí código de escenario 1
+    let cont = carrito.length
+
+    for(let i = 0; i < cont; i++) {
+        let article = carrito.shift()
+
+        total += article.precio
+    }
+
+    print(total)
 }
 
 /*
@@ -55,7 +67,10 @@ function cuentaDeAlumnos() {
     const grupoA = ["Juan Perez","Maria Garcia","Carlos Rodriguez","Luisa Martinez","Pedro Sanchez","Ana Lopez","Miguel Ramirez","Laura Fernandez","David Torres","Sofia Gonzalez","Javier Hernandez","Isabel Jimenez","Andres Diaz","Elena Castro"]
     const grupoB = ["Alejandro Ruiz","Carmen Ortega","Roberto Mendoza","Patricia Vargas","Eduardo Morales","Olga Reyes","Gustavo Paredes","Natalia Soto","Hector Delgado","Monica Castillo","Raul Rios","Raquel Valdez","Fernando Acosta","Silvia Castro","Manuel Vega","Lourdes Guzman","Jorge Navarro"]
 
-    // Completa aquí código de Escenario 2
+    let newGroup = []
+    newGroup = newGroup.concat(grupoA, grupoB)
+
+    print(newGroup.length)
 }
 
 /*
@@ -80,10 +95,25 @@ function transmitiendoBatch() {
     
     "DDDDDDDDDDDD","11010100101","01010101010","11110000000","00001111000","10101010101","11001100110","00110011001","11111111111","00000000000","10000000000","01000000000","11000000000","00100000000","10100000000","01100000000","11100000000","00010000000","10010000000","01010000000","11010000000","00110000000","10110000000","01110000000","11110000000","00001000000","10001000000","01001000000","11001000000","00101000000","10101000000","01101000000","11101000000","00011000000","10011000000","01011000000","11011000000","00111000000","10111000000","01111000000","11111000000","00000100000","10000100000","01000100000","11000100000","00100100000","10100100000","01100100000","11100100000","00010100000"];
 
-    // Completa aquí código de Escenario 3
+    let backup1 = []
+    backup1 = backup.slice(0, 50);
+
+    let backup2 = []
+    backup2 = backup.slice(50, 100);
+
+    let backup3 = []
+    backup3 = backup.slice(100, 150);
+
+    let backup4 = []
+    backup4 = backup.slice(150, 200);
+
+    print("Group 0-49\n" + backup1 + "\n" + backup1.length)
+    print("Group 50-99\n" + backup2 + "\n" + backup2.length)
+    print("Group 100-149\n" + backup3 + "\n" + backup3.length)
+    print("Group 150-199\n" + backup4 + "\n" + backup4.length)
 }
 
-//vaciarCarritoConTotal()
-//cuentaDeAlumnos()
-//transmitiendoBatch()
-
+//MAIN
+vaciarCarritoConTotal()
+cuentaDeAlumnos()
+transmitiendoBatch()
