@@ -1,47 +1,78 @@
-<html>
+<!DOCTYPE html5>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>JS & DOM</title>
+    </head>
 
-<head>
-    <title>JS & DOM</title>
-</head>
+    <body>
+        <div style="display: flex">
+            <input type="text" id="inputEncabezado" placeholder="Ingresa el nuevo encabezado"
+            style="width:70%;margin-bottom:10px" />
+        </div>
+        <div style="display: flex">
+            <button id="btnActualizacion" onClick="modificarEncabezado()" style="margin-right: 10px">Establecer Encabezado</button>
+            <button id="btnUndo" disabled>Encabezado Anterior</button>
+        </div>
+        <h1 id="encabezado">Esperando...</h1>
 
-<body>
-    <div style="display: flex">
-        <input type="text" id="inputEncabezado" placeholder="Ingresa el nuevo encabezado"
-        style="width:70%;margin-bottom:10px" />
-    </div>
-    <div style="display: flex">
-        <button id="btnActualizacion" onClick="modificarEncabezado()" style="margin-right: 10px">Establecer Encabezado</button>
-        <button id="btnUndo" disabled>Encabezado Anterior</button>
-    </div>
-    <h1 id="encabezado">...</h1>
+        <script>
+            /*
+            INSTRUCCIONES:
+            
+            1.  Codifica la función modificarEncabezado del botón "btnActualizacion" 
+                para que tome el valor del input "inputEncabezado" para cambiar el h1 "encabezado"
 
-    <script>
+            2.  Valida que el valor del input no sea vacío, si esta vacío notifica al usuario con alert() de que 
+                el valor no puede ser vacío
 
-        /*
-        INSTRUCCIONES:
-        
-        1.  Codifica la función modificarEncabezado del botón "btnActualizacion" 
-            para que tome el valor del input "inputEncabezado" para cambiar el h1 "encabezado"
+            3.  Agrega el evento `click` al botón "btnUndo", intenta codificar una función callback 
+                para que pueda realizar la función de establecer el encabezado a un título anterior
 
-        2.  Valida que el valor del input no sea vacío, si esta vacío notifica al usuario con alert() de que 
-            el valor no puede ser vacío
+            4.  Habilita el botón "btnUndo" una vez que se hayan establecido al menos 2 títulos
+                    *   Puedes usar un contador para saber cuantas veces se han establecido
+                        así podrás saber cuando desbloquear el botón
+            */
 
-        3.  Agrega el evento `click` al botón "btnUndo", intenta codificar una función callback 
-            para que pueda realizar la función de establecer el encabezado a un título anterior
+            const btnUndo = document.getElementById('btnUndo')
+            const tituloEncabezado = document.getElementById('encabezado')
+            const inputEncabezado = document.getElementById('inputEncabezado')
+            let cont = 0
+            let titleHistory = []
 
-        4.  Habilita el botón "btnUndo" una vez que se hayan establecido al menos 2 títulos
-                *   Puedes usar un contador para saber cuantas veces se han establecido
-                    así podrás saber cuando desbloquear el botón
-        */
+            function modificarEncabezado() {
+                let newTitle = inputEncabezado.value.trim()
 
-        const btnUndo = document.getElementById('btnUndo')
-        const tituloEncabezado = document.getElementById('encabezado')
-        const inputEncabezado = document.getElementById('inputEncabezado')
+                if (newTitle !== "") {
+                    tituloEncabezado.textContent = newTitle
+                    titleHistory.push(newTitle)
 
-        function modificarEncabezado() {
-            /* Tu código aquí */
-        }
-    </script>
-</body>
+                    cont++
 
+                    if (cont >= 2) {
+                        btnUndo.disabled = false
+                    }
+
+                    inputEncabezado.value = ""
+                } else {
+                    alert("¡Escribe el encabezado!")
+                }
+            }
+
+            btnUndo.addEventListener("click", function () {
+                titleHistory.pop()
+
+                let previousTitle = titleHistory[titleHistory.length-1]
+
+                tituloEncabezado.textContent = previousTitle
+
+                cont--
+
+                if (cont < 2) {
+                    btnUndo.disabled = true
+                }
+            });
+        </script>
+    </body>
 </html>
