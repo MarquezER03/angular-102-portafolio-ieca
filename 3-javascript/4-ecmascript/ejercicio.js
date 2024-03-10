@@ -9,7 +9,9 @@
     [10,9,8,7,6,5,4,3,2,1] // proviene de la función ordenamientoMayorAMenor
  */
 
-
+function print(argumentos) {
+    console.log(argumentos)
+}
 class ListaNumeros {
     constructor(numeros) {
         this._numeros = numeros
@@ -29,7 +31,7 @@ class ListaNumeros {
         // Calculo de la media
         const media = this.numeros.reduce((a, b) => a + b, 0) / this.numeros.length
 
-        // COMPLETA AQUÍ CÓDIGO CON MÉTODO .filter
+        print(this.numeros.filter(numero => numero > media))
     }
 
     ordenamientoMayorAMenor() {
@@ -42,8 +44,9 @@ class ListaNumeros {
         */
 
         // COMPLETA AQUÍ CÓDIGO CON MÉTODO .sort
+        this.numeros.sort((a, b) => b - a)
 
-        console.log(this.numeros)
+        print(this.numeros)
     }
     
 }
