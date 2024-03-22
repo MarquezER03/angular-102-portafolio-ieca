@@ -46,6 +46,15 @@ export class AppComponent implements OnInit {
     passkey: ''
   }
 
+  //Método para limpiar el formulario
+  limpiarFormulario() {
+    this.registroInputs = {
+      email: '',
+      passkey: ''
+    }
+  }
+
+
   pokedex: Pokemon[] = []
 
   nuevoPokemon: string = ''
@@ -57,6 +66,11 @@ export class AppComponent implements OnInit {
   agregarPersona() {
     this.listaPersonas.push(this.persona.nombre)
     this.persona.nombre = ''
+  }
+
+  //Método para eliminar los nombres de las personas de la lista.
+  eliminarPersona(index: number) {
+    this.listaPersonas.splice(index, 1)
   }
 
   contarOveja() {
